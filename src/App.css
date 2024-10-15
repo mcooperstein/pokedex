@@ -3,19 +3,17 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 20vmin;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.pokeball {
+  height: 10vmin;
 }
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 40vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,15 +22,68 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.App-main {
+  background-color: #282c34;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.search-box {
+  width: 100%;
+  height: 30px;
+  font-size: 1.5em;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin: 40px 0;
+  text-align: center;
+}
+
+.randomize-button {
+  padding: 5px;
+  margin: 0 0 40px;
+  border: 5px solid #3361a2;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 8px;
+  background-color:  #fbcc04;
+  color: #3361a2;
+  cursor: pointer;
+}
+
+.cardImg {
+  width: 100px;
+  height: 100px;
+}
+
+.pokemon-item {
+  float: left;
+  margin: 10px;
+}
+.pokemon-item a {
+  color: #000;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+  text-transform: capitalize;
+}
+
+.pokemon-item a:hover {
+  color: #3B4CCA;
+}
+
+ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 5px;
+  list-style: none;
 }

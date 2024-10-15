@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('renders randomize button', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const randomizeButton = screen.getByText(/choose/i);
+  expect(randomizeButton).toBeInTheDocument();
+  expect(randomizeButton).toHaveClass('randomize-button');
 });
