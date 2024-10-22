@@ -1,11 +1,13 @@
 import './App.css';
+import { pokemonData } from './pokemonData';
 import React, { useState } from "react";
-import Card from './Card';
 
-const PokeList = ({pokemonData, randPokemonData}) => {
-  const unfilteredPokemonList = pokemonData.sort((a,b) => a.name.localeCompare(b.name))
-
+function PokeList () {
+  const [pokemonList, setPokemonList] = useState(pokemonData);
+  const [searchTerm, setSearchTerm] = useState("");
   const [selectedPokemon, setSelectedPokemon] = useState(null);
+
+  const unfilteredPokemonList = pokemonList.sort((a,b) => a.name.localeCompare(b.name))
 
   const showPokemon = async (url) => {
     const response = await fetch(url);
@@ -16,31 +18,21 @@ const PokeList = ({pokemonData, randPokemonData}) => {
     }
 
      const data = await response.json();
-     console.log('data:', data);
+     console.log(data);
      setSelectedPokemon(data);
   }
 
   return (
-    <div> 
-        <Card selectedPokemon={selectedPokemon} randPokemonData={randPokemonData}/>
+    <div>
         <ul className="testy">
             {unfilteredPokemonList.map((pokemon) => (
                 <li key={pokemon.id} className="pokemon-item">
                     <a href="#" onClick={() => showPokemon(pokemon.url)}>{pokemon.name}</a>
-                    {/* <a href="#">{pokemon.name}</a> */}
                 </li>
             ))}
         </ul>
     </div>
   )
-    // const pokemonArray = pokemonData.map((pokemon) => {
-    //     return <Card key={pokemon.name} name={pokemon.name} url={pokemon.url} randPokemonData={randPokemonData}/>
-    // })
-    // return (
-    //     <div className="pizza">
-    //         {pokemonArray}
-    //     </div>
-    // )
 }
 
-export default PokeList;
+export default PokeList

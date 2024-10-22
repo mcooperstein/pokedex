@@ -2,20 +2,34 @@ import logo from './Pokémon_logo.png';
 import logo2 from './Pokeball.png';
 import './App.css';
 import React, {Component, useState, useEffect} from 'react';
+import ErrorBoundary from './ErrorBoundary';
 import CardList from './CardList';
 import SearchBox from './SearchBox'
 import RandomButton from './RandomButton';
+import Scroll from './Scroll';
 import PokeList from './PokeList';
 import { pokemonData } from './pokemonData';
+// import { pokemonData } from './pokemonData';
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      pokemonData: pokemonData,
-      randPokemonData: {},
+      // pokemonData: pokemonData,
+      pokemonData: [],
+      randPokemonData: '',
       searchField: ''
     }
+  }
+
+  componentDidMount() {
+    fetch('https://pokeapi.co/api/v2/pokemon?limit=1302&offset=0').then(response => {
+      console.log(response);
+      return response.json();
+    }).then(pokemon => {
+      console.log(pokemon)
+      this.setState({pokemonData: pokemon.results})
+    })
   }
 
   onSearchChange = (event) => {
@@ -43,13 +57,13 @@ class App extends Component {
     }
 
     const data = await response.json();
-    console.log(data);
+    console.log('getRandPokemon',data);
     this.setState({searchField: data.name})
     this.setState({randPokemonData: data});
   }
 
   render() {
-    const filteredPokemon = this.state.pokemonData.filter(pokemon => {
+    let filteredPokemon = this.state.pokemonData.filter(pokemon => {
       return pokemon.name.toLowerCase().includes(this.state.searchField.toLowerCase());
     })
     return (
@@ -65,8 +79,13 @@ class App extends Component {
           <SearchBox searchChange={this.onSearchChange} searchField={this.state.searchField}/>
           <RandomButton getRandPokemon={this.getRandPokemon}/>
         </main>
-        <CardList pokemonData={filteredPokemon} randPokemonData={this.state.randPokemonData}/>
-        <PokeList />
+        {/* <CardList pokemonData={filteredPokemon} randPokemonData={this.state.randPokemonData}/> */}
+        {/* <Scroll>
+          <CardList pokemonData={filteredPokemon}/>
+        </Scroll> */}
+        <ErrorBoundary>
+          <PokeList pokemonData={filteredPokemon} randPokemonData={this.state.randPokemonData}/>
+        </ErrorBoundary>
       </div>
     );
   }
