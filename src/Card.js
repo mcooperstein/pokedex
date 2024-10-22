@@ -14,7 +14,8 @@ const Card = (props) => {
             <div className="grow dib pa2 ma2 br5 shadow-hover">
                 <img alt={randPokemonData.name} className="cardImg" src={randPokemonData.sprites.front_default}/>
                 <p>{randPokemonData.name}</p>
-                <p>height: {randPokemonData.height}</p>
+                <p>Height: {randPokemonData.height}</p>
+                <p>Weight: {randPokemonData.weight}</p>
             </div>
         )
     } else {
@@ -23,6 +24,7 @@ const Card = (props) => {
                 <img alt={selectedPokemon.name} className="cardImg" src={selectedPokemon.sprites.front_default}/>
                 <p>{selectedPokemon.name}</p>
                 <p>height: {selectedPokemon.height}</p>
+                <p>weight: {selectedPokemon.weight}</p>
             </div>
         )
     }
